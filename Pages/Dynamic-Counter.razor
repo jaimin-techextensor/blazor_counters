@@ -1,0 +1,51 @@
+﻿<div class="col-sm-6">
+    <h1>Counter @counter</h1>
+
+    <p role="status">Current count: @passedValue </p>
+
+    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+</div>
+
+@code {
+    [Parameter]
+    public int counter { get; set; }
+
+    [Parameter]
+    public int passedValue { get; set; }
+
+    [Parameter]
+    public int flag { get; set; }
+
+    private void IncrementCount()
+    {
+        counterProcessor.UpdateCounter(flag);
+    }
+
+    protected override void OnInitialized()
+    {
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+        counterProcessor.counter.Log.Append("Counter " + flag + " Event: OnInitialized");
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+        counterProcessor.counter.Log.Append("Counter " + flag + " Event: OnInitializedAsync");
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+    }
+
+    protected override void OnParametersSet()
+    {
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+        counterProcessor.counter.Log.Append("Counter " + flag + " Event: OnParametersSet");
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+        counterProcessor.counter.Log.Append("Counter " + flag + " Event: OnParametersSetAsync");
+        counterProcessor.counter.Log.Append(Environment.NewLine);
+    }
+}
